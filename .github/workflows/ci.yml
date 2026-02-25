@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [trunk, main]
 
+permissions:
+  contents: read
+  checks: write
+
 jobs:
   test-and-build:
     runs-on: ubuntu-latest
@@ -27,7 +31,8 @@ jobs:
         run: npm run test:ci
 
       - name: Publish test report
-        if: always()
+        if: always() && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.fork == false)
+        continue-on-error: true
         uses: mikepenz/action-junit-report@v4
         with:
           report_paths: "reports/junit.xml"
