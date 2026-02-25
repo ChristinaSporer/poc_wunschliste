@@ -1,5 +1,7 @@
 # Geschenke-Manager PoC
 
+[![CI](https://github.com/ChristinaSporer/poc_wunschliste/actions/workflows/ci.yml/badge.svg)](https://github.com/ChristinaSporer/poc_wunschliste/actions/workflows/ci.yml)
+
 Proof-of-Concept als Web-App für eine Person (kein Login).
 
 Stack:
