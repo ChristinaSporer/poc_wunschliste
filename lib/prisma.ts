@@ -5,9 +5,11 @@ const globalForPrisma = globalThis as unknown as {
   dbInitPromise: Promise<void> | undefined;
 };
 
-if (process.env.VERCEL) {
-  process.env.DATABASE_URL = "file:/tmp/dev.db";
-}
+const runtimeDatabaseUrl =
+  process.env.DATABASE_URL ??
+  (process.env.NODE_ENV === "production" ? "file:/tmp/dev.db" : "file:./dev.db");
+
+process.env.DATABASE_URL = runtimeDatabaseUrl;
 
 const basePrisma =
   globalForPrisma.prisma ??
