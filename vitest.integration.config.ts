@@ -5,8 +5,10 @@ export default defineConfig({
   plugins: [tsconfigPaths()],
   test: {
     environment: "node",
-    include: ["app/**/*.test.ts", "tests/unit/**/*.test.ts"],
-    exclude: ["tests/integration/**/*.test.ts"],
+    include: ["tests/integration/**/*.test.ts"],
+    globalSetup: ["tests/integration/global-setup.ts"],
     clearMocks: true,
+    maxWorkers: 1,
+    testTimeout: 90_000,
   },
 });

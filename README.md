@@ -67,6 +67,27 @@ In Vercel setzen:
 - Environment Variable `DATABASE_URL` mit deiner Postgres-Connection-URL
 - Build Command: `npm run vercel-build`
 
+## Tests
+
+Unit-Tests ausführen:
+
+```bash
+npm run test
+```
+
+API-Integrationstests ausführen (echte HTTP-Calls gegen lokale Next-App):
+
+```bash
+# separate Test-Datenbank verwenden
+$env:DATABASE_URL_TEST="postgresql://USER:PASSWORD@HOST/DB_TEST?sslmode=require"
+npm run test:integration
+```
+
+Hinweise:
+- Die Integrationstests starten die App auf `http://127.0.0.1:4010`.
+- Vor dem Lauf wird die Test-Datenbank per `prisma migrate reset --force` zurückgesetzt.
+- Ohne `DATABASE_URL_TEST` werden die Integrationstests automatisch übersprungen.
+
 ## Demo-Smoketest
 
 Voraussetzung:

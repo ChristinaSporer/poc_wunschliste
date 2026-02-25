@@ -9,6 +9,7 @@
     "start": "next start",
     "lint": "eslint",
     "test": "vitest run",
+    "test:integration": "vitest run -c vitest.integration.config.ts",
     "test:watch": "vitest",
     "test:ci": "vitest run --reporter=verbose --reporter=junit --outputFile=./reports/junit.xml",
     "db:migrate": "prisma db push",
