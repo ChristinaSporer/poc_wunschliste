@@ -31,29 +31,32 @@ export default async function SharePage({
   }
 
   return (
-    <main className="page">
-      <h1>Geschenkideen</h1>
-      <p className="muted">Read-only Ansicht über Share-Link.</p>
+    <>
+      <style>{`.site-header { display: none; }`}</style>
+      <main className="page">
+        <h1>Geschenkideen</h1>
+        <p className="muted">Read-only Ansicht über Share-Link.</p>
 
-      {person.giftIdeas.length === 0 ? (
-        <p className="card">Keine offenen Ideen vorhanden.</p>
-      ) : (
-        <ul className="list card">
-          {person.giftIdeas.map((idea) => (
-            <li key={idea.id}>
-              <strong>{idea.title}</strong>
-              {idea.description ? <p>{idea.description}</p> : null}
-              {idea.url ? (
-                <p>
-                  <a href={idea.url} target="_blank" rel="noreferrer">
-                    Link öffnen
-                  </a>
-                </p>
-              ) : null}
-            </li>
-          ))}
-        </ul>
-      )}
-    </main>
+        {person.giftIdeas.length === 0 ? (
+          <p className="card">Keine offenen Ideen vorhanden.</p>
+        ) : (
+          <ul className="list card">
+            {person.giftIdeas.map((idea) => (
+              <li key={idea.id}>
+                <strong>{idea.title}</strong>
+                {idea.description ? <p>{idea.description}</p> : null}
+                {idea.url ? (
+                  <p>
+                    <a href={idea.url} target="_blank" rel="noreferrer">
+                      Link öffnen
+                    </a>
+                  </p>
+                ) : null}
+              </li>
+            ))}
+          </ul>
+        )}
+      </main>
+    </>
   );
 }
