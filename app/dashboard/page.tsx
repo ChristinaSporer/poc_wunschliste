@@ -36,7 +36,7 @@ export default async function DashboardPage() {
   return (
     <main className="page">
       <h1>Dashboard</h1>
-      <p className="muted">Übersicht für den Single-Haushalt.</p>
+      <p className="muted">Übersicht für eine Person.</p>
 
       <section className="grid stats-grid">
         <article className="card">

@@ -1,4 +1,4 @@
-- Project: Geschenke-Manager Proof-of-Concept (Single-Haushalt, kein Login)
+- Project: Geschenke-Manager Proof-of-Concept (Person, kein Login)
 - Stack: Next.js App Router + TypeScript + Prisma + SQLite
 - UI: minimal, plain CSS/HTML, keine UI-Library
 - Pages: /dashboard, /people, /people/[id], /print, /share/[token]

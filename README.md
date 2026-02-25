@@ -1,6 +1,6 @@
 # Geschenke-Manager PoC
 
-Proof-of-Concept als Web-App für einen Single-Haushalt (kein Login).
+Proof-of-Concept als Web-App für eine Person (kein Login).
 
 Stack:
 - Next.js (App Router) + TypeScript
