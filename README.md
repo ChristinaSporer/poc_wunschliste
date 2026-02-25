@@ -4,7 +4,7 @@ Proof-of-Concept als Web-App für einen Single-Haushalt (kein Login).
 
 Stack:
 - Next.js (App Router) + TypeScript
-- Prisma + SQLite
+- Prisma + PostgreSQL
 - Minimales UI mit plain CSS/HTML
 
 ## Seiten
@@ -31,19 +31,25 @@ Stack:
 npm install
 ```
 
-2. Datenbank migrieren:
+2. `DATABASE_URL` in `.env` setzen (PostgreSQL, z. B. Neon):
 
-```bash
-npm run db:migrate
+```env
+DATABASE_URL="postgresql://USER:PASSWORD@HOST/DB?sslmode=require"
 ```
 
-3. Demo-Daten einspielen (4 Personen + mehrere Ideen):
+3. Datenbank-Schema anwenden:
+
+```bash
+npm run db:push
+```
+
+4. Demo-Daten einspielen (4 Personen + mehrere Ideen):
 
 ```bash
 npm run db:seed
 ```
 
-4. Dev-Server starten:
+5. Dev-Server starten:
 
 ```bash
 npm run dev
@@ -53,9 +59,11 @@ App läuft unter `http://localhost:3000`.
 
 ## Deployment
 
-Deployment-Ziel ist Vercel. SQLite ist für den PoC lokal ausreichend; für produktive Nutzung auf Vercel sollte ein persistenter DB-Service verwendet werden.
+Deployment-Ziel ist Vercel mit PostgreSQL (z. B. Neon) für persistente Daten.
 
-Für diesen PoC ohne Persistenz auf Vercel: Environment Variable `DATABASE_URL=file:/tmp/dev.db` setzen.
+In Vercel setzen:
+- Environment Variable `DATABASE_URL` mit deiner Postgres-Connection-URL
+- Build Command: `npm run vercel-build`
 
 ## Demo-Smoketest
 
