@@ -1,20 +1,35 @@
 import { GiftStatus, PrismaClient } from "@prisma/client";
+import { mkdirSync } from "fs";
 
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;
   dbInitPromise: Promise<void> | undefined;
 };
 
+const isVercelRuntime =
+  Boolean(process.env.VERCEL_ENV) || Boolean(process.env.VERCEL_URL) || Boolean(process.env.AWS_REGION);
+
 const runtimeDatabaseUrl =
   process.env.DATABASE_URL ??
-  (process.env.NODE_ENV === "production" ? "file:/tmp/dev.db" : "file:./dev.db");
+  (isVercelRuntime || process.env.NODE_ENV === "production"
+    ? "file:/tmp/prisma/dev.db"
+    : "file:./dev.db");
 
 process.env.DATABASE_URL = runtimeDatabaseUrl;
+
+if (runtimeDatabaseUrl.startsWith("file:/tmp/")) {
+  mkdirSync("/tmp/prisma", { recursive: true });
+}
 
 const basePrisma =
   globalForPrisma.prisma ??
   new PrismaClient({
     log: process.env.NODE_ENV === "development" ? ["error", "warn"] : ["error"],
+    datasources: {
+      db: {
+        url: runtimeDatabaseUrl,
+      },
+    },
   });
 
 async function bootstrapSqliteSchema() {
