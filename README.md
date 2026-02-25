@@ -1,6 +1,6 @@
 # Geschenke-Manager PoC
 
-[![CI](https://github.com/ChristinaSporer/poc_wunschliste/actions/workflows/ci.yml/badge.svg)](https://github.com/ChristinaSporer/poc_wunschliste/actions/workflows/ci.yml)
+[![CI](https://github.com/ChristinaSporer/poc_wunschliste/actions/workflows/ci.yml/badge.svg?branch=trunk)](https://github.com/ChristinaSporer/poc_wunschliste/actions/workflows/ci.yml?query=branch%3Atrunk)
 
 Proof-of-Concept als Web-App für eine Person (kein Login).
 
