@@ -13,6 +13,7 @@ export default async function SharePage({
   const person = await prisma.person.findUnique({
     where: { shareToken: token },
     select: {
+      name: true,
       giftIdeas: {
         where: { giftedAt: null },
         orderBy: { createdAt: "desc" },
@@ -34,7 +35,7 @@ export default async function SharePage({
     <>
       <style>{`.site-header { display: none; }`}</style>
       <main className="page">
-        <h1>Geschenkideen</h1>
+        <h1>Geschenkideen für {person.name}</h1>
         <p className="muted">Read-only Ansicht über Share-Link.</p>
 
         {person.giftIdeas.length === 0 ? (
