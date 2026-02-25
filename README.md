@@ -55,6 +55,8 @@ App läuft unter `http://localhost:3000`.
 
 Deployment-Ziel ist Vercel. SQLite ist für den PoC lokal ausreichend; für produktive Nutzung auf Vercel sollte ein persistenter DB-Service verwendet werden.
 
+Für diesen PoC ohne Persistenz auf Vercel: Environment Variable `DATABASE_URL=file:/tmp/dev.db` setzen.
+
 ## Demo-Smoketest
 
 Voraussetzung:
