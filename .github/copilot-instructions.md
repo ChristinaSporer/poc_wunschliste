@@ -1,0 +1,7 @@
+- Project: Geschenke-Manager Proof-of-Concept (Single-Haushalt, kein Login)
+- Stack: Next.js App Router + TypeScript + Prisma + SQLite
+- UI: minimal, plain CSS/HTML, keine UI-Library
+- Pages: /dashboard, /people, /people/[id], /print, /share/[token]
+- Share page must remain read-only and only show gift ideas (no birthdays, notes, or past gifts)
+- Backend endpoints are implemented with Next.js route handlers under app/api/.../route.ts
+- Keep changes focused and small; do not add features beyond the PoC scope
