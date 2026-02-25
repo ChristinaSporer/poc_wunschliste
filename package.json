@@ -8,6 +8,8 @@
     "vercel-build": "prisma db push && prisma db seed && next build",
     "start": "next start",
     "lint": "eslint",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "db:migrate": "prisma db push",
     "db:push": "prisma db push",
     "db:seed": "prisma db seed"
@@ -26,6 +28,8 @@
     "eslint-config-next": "16.1.6",
     "prisma": "^6.16.2",
     "tsx": "^4.21.0",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vite-tsconfig-paths": "^6.1.1",
+    "vitest": "^4.0.18"
   }
 }
