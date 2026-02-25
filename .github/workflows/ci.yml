@@ -37,6 +37,7 @@ jobs:
         with:
           report_paths: "reports/junit.xml"
           detailed_summary: true
+          include_passed: true
 
       - name: Upload test report artifact
         if: always()
