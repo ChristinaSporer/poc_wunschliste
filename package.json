@@ -10,6 +10,7 @@
     "lint": "eslint",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:ci": "vitest run --reporter=verbose --reporter=junit --outputFile=./reports/junit.xml",
     "db:migrate": "prisma db push",
     "db:push": "prisma db push",
     "db:seed": "prisma db seed"
