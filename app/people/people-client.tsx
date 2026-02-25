@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import type { PersonListItem } from "./page";
 
 type Props = {
@@ -10,7 +9,7 @@ type Props = {
 };
 
 export function PeopleClient({ initialPeople }: Props) {
-  const router = useRouter();
+  const [people, setPeople] = useState<PersonListItem[]>(initialPeople);
   const [name, setName] = useState("");
   const [birthday, setBirthday] = useState("");
   const [notes, setNotes] = useState("");
@@ -38,10 +37,29 @@ export function PeopleClient({ initialPeople }: Props) {
         throw new Error(payload.error ?? "Speichern fehlgeschlagen");
       }
 
+      const created = (await response.json()) as {
+        id: number;
+        name: string;
+        birthday: string | null;
+        notes: string | null;
+        shareToken: string;
+      };
+
+      setPeople((currentPeople) =>
+        [...currentPeople, {
+          id: created.id,
+          name: created.name,
+          birthday: created.birthday,
+          notes: created.notes,
+          shareToken: created.shareToken,
+          totalIdeas: 0,
+          openIdeas: 0,
+        }].sort((firstPerson, secondPerson) => firstPerson.name.localeCompare(secondPerson.name, "de")),
+      );
+
       setName("");
       setBirthday("");
       setNotes("");
-      router.refresh();
     } catch (requestError) {
       setError(requestError instanceof Error ? requestError.message : "Unbekannter Fehler");
     } finally {
@@ -53,8 +71,10 @@ export function PeopleClient({ initialPeople }: Props) {
     const confirmed = window.confirm("Person wirklich löschen?");
     if (!confirmed) return;
 
-    await fetch(`/api/people/${id}`, { method: "DELETE" });
-    router.refresh();
+    const response = await fetch(`/api/people/${id}`, { method: "DELETE" });
+    if (response.ok) {
+      setPeople((currentPeople) => currentPeople.filter((person) => person.id !== id));
+    }
   }
 
   return (
@@ -93,11 +113,11 @@ export function PeopleClient({ initialPeople }: Props) {
 
       <section className="card">
         <h2>Alle Personen</h2>
-        {initialPeople.length === 0 ? (
+        {people.length === 0 ? (
           <p className="muted">Noch keine Personen vorhanden.</p>
         ) : (
           <ul className="list people-list">
-            {initialPeople.map((person) => (
+            {people.map((person) => (
               <li key={person.id}>
                 <div>
                   <Link href={`/people/${person.id}`}>{person.name}</Link>
